@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para la Mejor Novia del Mundo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        romantic: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            900: '#831843',
+                            gold: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        'script': ['"Dancing Script"', 'cursive'],
+                        'serif': ['"Lora"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            min-height: 100vh;
+        }
+
+        /* Falling Hearts Animation */
+        .heart {
+            position: absolute;
+            top: -10vh;
+            font-size: 1.5rem;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg) scale(0.8); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        /* Fade In Transitions */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image Hover Effects */
+        .photo-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .photo-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(219, 39, 119, 0.3);
+        }
+
+        .photo-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .photo-card:hover .photo-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-serif text-romantic-900 flex flex-col items-center">
+
+    <!-- Container for falling hearts -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <main class="w-full max-w-4xl mx-auto px-4 py-12 relative z-10 flex flex-col items-center min-h-screen">
+        
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="text-center flex flex-col items-center justify-center min-h-[80vh] space-y-8">
+            <h1 class="font-script text-5xl md:text-7xl text-romantic-600 mb-4 animate-pulse">
+                ¡Feliz Día de la Mujer!
+            </h1>
+            <p class="text-xl md:text-2xl text-romantic-900 max-w-lg">
+                Para la mujer más increíble, valiente y hermosa que tengo el privilegio de llamar mi novia.
+            </p>
+            <button onclick="revealSection('poem-section')" class="mt-8 px-8 py-4 bg-gradient-to-r from-romantic-500 to-romantic-600 text-white rounded-full text-xl shadow-lg shadow-romantic-500/50 hover:shadow-romantic-500/80 hover:scale-105 transition-all duration-300">
+                Toca aquí para tu primera sorpresa ❤️
+            </button>
+        </div>
+
+        <!-- Poem Section (Hidden initially) -->
+        <div id="poem-section" class="hidden reveal-section w-full text-center py-16 flex-col items-center">
+            <div class="bg-white/70 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-xl border border-white/50 max-w-2xl mx-auto">
+                <h2 class="font-script text-4xl md:text-5xl text-romantic-600 mb-8">¿Por qué eres la mejor?</h2>
+                <div class="space-y-6 text-lg md:text-xl leading-relaxed italic text-gray-800">
+                    <p>
+                        En este día que celebra tu esencia,<br>
+                        agradezco al cielo por tu presencia.
+                    </p>
+                    <p>
+                        Eres la fuerza que impulsa mi vida,<br>
+                        la mejor compañera, mi alma querida.<br>
+                        Con tu sonrisa iluminas mis días,<br>
+                        y llenas mi mundo de puras alegrías.
+                    </p>
+                    <p>
+                        No hay mujer más hermosa, por dentro y por fuera,<br>
+                        eres mi refugio, mi paz verdadera.<br>
+                        Te amo infinito, te amo con pasión,<br>
+                        eres la dueña de todo mi corazón.
+                    </p>
+                </div>
+            </div>
+            
+            <button onclick="revealSection('gallery-section')" class="mt-12 px-8 py-4 bg-white text-romantic-600 border-2 border-romantic-500 rounded-full text-lg font-semibold shadow-md hover:bg-romantic-50 transition-all duration-300">
+                Ver nuestros recuerdos ✨
+            </button>
+        </div>
+
+        <!-- Gallery Section -->
+        <div id="gallery-section" class="hidden reveal-section w-full py-16 flex-col items-center">
+            <h2 class="font-script text-4xl text-romantic-600 mb-10 text-center">Tú y Yo</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+                <!-- Image 1 -->
+                <div class="photo-card relative rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white p-2">
+                    <img src="3.jpg" alt="Recuerdo 1" class="w-full h-auto rounded-xl object-cover">
+                    <div class="photo-overlay absolute inset-0 bg-romantic-900/60 flex items-center justify-center rounded-2xl m-2">
+                        <p class="text-white font-script text-2xl text-center px-4">Tu sonrisa es mi luz</p>
+                    </div>
+                </div>
+                
+                <!-- Image 2 -->
+                <div class="photo-card relative rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white p-2">
+                    <img src="7.jpeg" alt="Recuerdo 2" class="w-full h-auto rounded-xl object-cover">
+                    <div class="photo-overlay absolute inset-0 bg-romantic-900/60 flex items-center justify-center rounded-2xl m-2">
+                        <p class="text-white font-script text-2xl text-center px-4">Momentos inolvidables</p>
+                    </div>
+                </div>
+
+                <!-- Image 3 -->
+                <div class="photo-card relative rounded-2xl overflow-hidden shadow-lg cursor-pointer bg-white p-2">
+                    <img src="8.png" alt="Recuerdo 3" class="w-full h-auto rounded-xl object-cover">
+                    <div class="photo-overlay absolute inset-0 bg-romantic-900/60 flex items-center justify-center rounded-2xl m-2">
+                        <p class="text-white font-script text-2xl text-center px-4">Siempre juntos</p>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="revealSection('video-section')" class="mt-12 px-8 py-4 bg-romantic-gold text-white rounded-full text-lg font-semibold shadow-lg shadow-yellow-600/30 hover:scale-105 transition-all duration-300">
+                Tengo algo más para ti 🎥
+            </button>
+        </div>
+
+        <!-- Video Section -->
+        <div id="video-section" class="hidden reveal-section w-full py-16 flex-col items-center text-center pb-32">
+            <h2 class="font-script text-4xl text-romantic-600 mb-6">Un Mensaje Especial</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-md mx-auto">Porque las palabras a veces no alcanzan, aquí hay un pequeño video para recordarte cuánto te amo.</p>
+            
+            <!-- Video Placeholder -->
+            <div class="w-full max-w-2xl bg-white p-4 rounded-3xl shadow-2xl">
+                <div class="relative pb-[56.25%] h-0 rounded-2xl overflow-hidden bg-gray-200">
+                    <!-- Replace the iframe src with your actual video link (YouTube, Vimeo, etc) -->
+                    <iframe class="absolute top-0 left-0 w-full h-full" 
+                            src="1011.mp4" 
+                            title="Video sorpresa" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Final Interactive Button -->
+            <div class="mt-16">
+                <button onclick="showFinalMessage(this)" class="px-10 py-5 bg-romantic-600 text-white rounded-full text-2xl font-script shadow-xl hover:bg-romantic-900 transition-all duration-300 animate-bounce">
+                    ¡Te Amo Muchísimo!
+                </button>
+                <div id="final-message" class="hidden mt-6 text-2xl font-bold text-romantic-600">
+                    ¡Feliz Día de la Mujer, mi Reina! 👑💖
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Create falling romantic elements (hearts and flowers)
+        function createFallingElements() {
+            const container = document.getElementById('hearts-container');
+            const emojis = ['❤️', '💖', '🌸', '✨', '🌹'];
+            
+            setInterval(() => {
+                const element = document.createElement('div');
+                element.classList.add('heart');
+                
+                // Randomize appearance
+                element.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.animationDuration = (Math.random() * 3 + 3) + 's'; // 3 to 6 seconds
+                element.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+                
+                container.appendChild(element);
+                
+                // Remove element after it falls
+                setTimeout(() => {
+                    element.remove();
+                }, 6000);
+            }, 300); // Create a new element every 300ms
+        }
+
+        // Initialize falling elements on load
+        window.onload = function() {
+            createFallingElements();
+        };
+
+        // Function to reveal sections sequentially
+        function revealSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            
+            // Remove hidden class but keep it invisible for animation
+            section.classList.remove('hidden');
+            section.classList.add('flex'); // Add flex to maintain layout
+            
+            // Trigger reflow to ensure transition works
+            void section.offsetWidth;
+            
+            // Add visible class to trigger CSS transition
+            section.classList.add('visible');
+
+            // Scroll to the new section smoothly
+            setTimeout(() => {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+            
+            // Hide the button that was clicked (find it in the previous sibling or parent)
+            if(event && event.target) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Final message interaction
+        function showFinalMessage(btn) {
+            btn.style.display = 'none';
+            const msg = document.getElementById('final-message');
+            msg.classList.remove('hidden');
+            msg.classList.add('animate-pulse');
+            
+            // Create a burst of hearts
+            for(let i=0; i<30; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.classList.add('heart');
+                    el.innerText = '💘';
+                    el.style.left = Math.random() * 100 + 'vw';
+                    el.style.animationDuration = '2s';
+                    document.getElementById('hearts-container').appendChild(el);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
